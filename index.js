@@ -3,6 +3,8 @@ morgan = require('morgan');
 
 const app = express();
 
+app.use(express.static("public"));
+
 app.use(morgan('common'));
 
 let myLogger = (req, res, next) => {
@@ -17,7 +19,6 @@ let myLogger = (req, res, next) => {
 
   app.use(myLogger);
   app.use(requestTime);
-  app.use('public/documentation.html', express.static('public'));
 
   const topMovies = [
     {
@@ -84,7 +85,7 @@ let myLogger = (req, res, next) => {
     responseText += '<small>Requested at: ' + req.requestTime + '</small>';
     res.send(responseText);
   });
-  
+
   app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
