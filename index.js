@@ -73,18 +73,58 @@ let myLogger = (req, res, next) => {
       },
   ];
   
-  app.get('/movies', (req, res) => {
-    let responseText = 'List of movies';
-    responseText += '<small>Requested at: ' + req.requestTime + '</small>';
-    res.json(topMovies);
-  
-  });
+// Return a list of ALL movies to the user
+app.get('/movies', (req, res) => {
+  res.send(topMovies);
+});
 
-  app.get('/', (req, res) => {
-    let responseText = 'Welcome to my Nicolas Cage app!';
-    responseText += '<small>Requested at: ' + req.requestTime + '</small>';
-    res.send(responseText);
-  });
+// Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user
+app.get('/movies/:title', (req, res) => {
+  const title = req.params.title;
+  res.send(`Return data about the movie with the title ${title}`);
+});
+
+// Return data about a genre (description) by name/title (e.g., “Thriller”)
+app.get('/genres/:name', (req, res) => {
+  const name = req.params.name;
+  res.send(`Return data about the genre with the name ${name}`);
+});
+
+// Return data about a director (bio, birth year, death year) by name
+app.get('/directors/:name', (req, res) => {
+  const name = req.params.name;
+  res.send(`Return data about the director with the name ${name}`);
+});
+
+// Allow new users to register
+app.post('/users/register', (req, res) => {
+  res.send('Allow new users to register');
+});
+
+// Allow users to update their user info (username)
+app.put('/users/:email', (req, res) => {
+  const email = req.params.email;
+  res.send(`Allow user with email ${email} to update their user info`);
+});
+
+// Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
+app.post('/users/:email/favorites', (req, res) => {
+  const email = req.params.email;
+  res.send(`Allow user with email ${email} to add a movie to their list of favorites`);
+});
+
+// Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
+app.delete('/users/:email/favorites/:title', (req, res) => {
+  const email = req.params.email;
+  const title = req.params.title;
+  res.send(`Allow user with email ${email} to remove the movie with the title ${title} from their list of favorites`);
+});
+
+// Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
+app.delete('/users/:email', (req, res) => {
+  const email = req.params.email;
+  res.send(`Allow user with email ${email} to deregister`);
+});
 
   app.use((err, req, res, next) => {
     console.error(err.stack);
