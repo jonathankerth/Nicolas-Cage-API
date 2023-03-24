@@ -18,30 +18,14 @@ let movieSchema = mongoose.Schema({
 
 let userSchema = mongoose.Schema({
     Username: {type: String, required: true},
-  Password: {type: String, required: true},
-  Email: {type: String, required: true},
-  Birthday: Date,
-  FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
-});
-
-let genreSchema = mongoose.Schema({
-    Name: {type: String, required: true},
-    Description: {type: String, required: false}
-});
-
-let directorSchema = mongoose.Schema({
-    Name: {type: String, required: true},
-    Bio: {type: String, required: false},
-    Birth: {type: Date, required: false},
-    Death: {type: Date, required: false}
+    Password: {type: String, required: true},
+    Email: {type: String, required: true},
+    Birthday: {type: Date, required: true},
+    FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
 });
 
 let Movie = mongoose.model('Movie', movieSchema);
 let User = mongoose.model('User', userSchema);
-let Genre = mongoose.model('Genre', genreSchema);
-let Director = mongoose.model('Director', directorSchema)
 
 module.exports.Movie = Movie;
 module.exports.User = User;
-module.exports.Genre = Genre;
-module.exports.Director = Director;
