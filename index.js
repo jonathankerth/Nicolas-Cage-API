@@ -33,6 +33,11 @@ app.use(requestTime);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+let auth = require('./auth')(app);
+
+const passport = require('passport');
+require('./passport');
+
 // endpoints
 
 //Add a user
@@ -193,7 +198,7 @@ app.delete("/users/:Username/movies/:MovieID", (req, res) => {
 });
 
 // Get all movies
-app.get("/movies", (req, res) => {
+app.get("/movies",passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
     .then((movies) => {
       res.status(200).json(movies);
