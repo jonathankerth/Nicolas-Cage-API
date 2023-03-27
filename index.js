@@ -33,12 +33,31 @@ app.use(requestTime);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-let auth = require('./auth')(app);
+let auth = require("./auth.js")(app);
 
-const passport = require('passport');
-require('./passport');
+const passport = require("passport");
+require("./passport");
 
 // endpoints
+app.post("/login", (req, res, next) => {
+  passport.authenticate("local", { session: false }, (err, user, info) => {
+    if (err || !user) {
+      return res.status(400).json({
+        message: "Incorrect username or password",
+        user: user
+      });
+    }
+
+    req.login(user, { session: false }, (err) => {
+      if (err) {
+        return next(err);
+      }
+
+      const token = jwt.sign({ sub: user.id }, "your_jwt_secret");
+      return res.json({ user, token });
+    });
+  })(req, res, next);
+});
 
 //Add a user
 /* We’ll expect JSON in this format
