@@ -12,7 +12,7 @@ let Users = Models.User,
     passwordField: 'Password'
   }, (username, password, callback) => {
     console.log(username + '  ' + password);
-    Users.findOne({ Username: username }, (error, user) => {
+    Users.findOne.then().catch();({ Username: username }, (error, user) => {
       if (error) {
         console.log(error);
         return callback(error);
@@ -32,7 +32,7 @@ let Users = Models.User,
       return callback(null, user);
     });
   }));
-  
+
 passport.use(new JWTStrategy({
   jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
   secretOrKey: 'your_jwt_secret'

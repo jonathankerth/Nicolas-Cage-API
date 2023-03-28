@@ -1,0 +1,218 @@
+[{
+  "_id": {
+    "$oid": "641276e3a8484277e81a58ba"
+  },
+  "Title": "Silence of the Lambs",
+  "Description": "A young FBI cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer.",
+  "Genre": {
+    "Name": "Thriller",
+    "Description": "Thriller film, also known as suspense film or suspense thriller, is a broad film genre that involves excitement and suspense in the audience."
+  },
+  "Director": {
+    "Name": "Jonathan Demme",
+    "Bio": "Robert Jonathan Demme was an American director, producer, and screenwriter.",
+    "Birth": "1944",
+    "Death": "2017"
+  },
+  "ImagePath": "silenceofthelambs.png",
+  "Featured": true
+},{
+  "_id": {
+    "$oid": "64127dc6210e96f6a800e6ba"
+  },
+  "title": "The Godfather",
+  "year": 1972,
+  "genre": {
+    "name": "Crime",
+    "description": "A genre of fiction that deals with crimes, their detection, criminals, and their motives."
+  },
+  "director": {
+    "name": "Francis Ford Coppola",
+    "nationality": "American"
+  },
+  "actors": [
+    "Marlon Brando",
+    "Al Pacino",
+    "James Caan"
+  ],
+  "duration": 175,
+  "rating": 9.2,
+  "country": "United States"
+},{
+  "_id": {
+    "$oid": "64127dd5210e96f6a800e6bb"
+  },
+  "title": "Apocalypse Now",
+  "year": 1979,
+  "genre": {
+    "name": "War",
+    "description": "A genre of fiction that focuses on military conflict and the aftermath of warfare."
+  },
+  "director": {
+    "name": "Francis Ford Coppola",
+    "nationality": "American"
+  },
+  "actors": [
+    "Martin Sheen",
+    "Robert Duvall",
+    "Marlon Brando"
+  ],
+  "duration": 147,
+  "rating": 8.5,
+  "country": "United States"
+},{
+  "_id": {
+    "$oid": "64127dda210e96f6a800e6bc"
+  },
+  "title": "The Conversation",
+  "year": 1974,
+  "genre": {
+    "name": "Thriller",
+    "description": "A genre of fiction that uses suspense and tension to create an exciting experience for the viewer."
+  },
+  "director": {
+    "name": "Francis Ford Coppola",
+    "nationality": "American"
+  },
+  "actors": [
+    "Gene Hackman",
+    "John Cazale",
+    "Allen Garfield"
+  ],
+  "duration": 113,
+  "rating": 7.8,
+  "country": "United States"
+},{
+  "_id": {
+    "$oid": "64127de2210e96f6a800e6bd"
+  },
+  "title": "Goodfellas",
+  "year": 1990,
+  "genre": {
+    "name": "Crime",
+    "description": "old men shooting the shit."
+  },
+  "director": {
+    "name": "Martin Scorsese",
+    "nationality": "American",
+    "bio": "New bio for John Smith"
+  },
+  "actors": [
+    "Robert De Niro",
+    "Ray Liotta",
+    "Joe Pesci"
+  ],
+  "duration": 146,
+  "rating": 8.7,
+  "country": "United States"
+},{
+  "_id": {
+    "$oid": "64127ed5210e96f6a800e6be"
+  },
+  "title": "Leaving Las Vegas",
+  "year": 1995,
+  "genre": {
+    "name": "Drama",
+    "description": "A genre of fiction that focuses on human emotions and relationships."
+  },
+  "director": {
+    "name": "Mike Figgis",
+    "nationality": "British"
+  },
+  "actors": [
+    "Nicolas Cage",
+    "Elisabeth Shue",
+    "Julian Sands"
+  ],
+  "duration": 111,
+  "rating": 7.5,
+  "country": "United States"
+},{
+  "_id": {
+    "$oid": "64127ed5210e96f6a800e6bf"
+  },
+  "title": "Face/Off",
+  "year": 1997,
+  "genre": {
+    "name": "Action",
+    "description": "A genre of fiction that typically involves violence, extended fighting scenes, and high-speed chases."
+  },
+  "director": {
+    "name": "John Woo",
+    "nationality": "Hong Kong"
+  },
+  "actors": [
+    "John Travolta",
+    "Nicolas Cage",
+    "Joan Allen"
+  ],
+  "duration": 138,
+  "rating": 7.3,
+  "country": "United States"
+},{
+  "_id": {
+    "$oid": "64127ed5210e96f6a800e6c0"
+  },
+  "title": "National Treasure",
+  "year": 2004,
+  "genre": {
+    "name": "Adventure",
+    "description": "A genre of fiction that typically involves exploration, discovery, and often a quest for a hidden treasure."
+  },
+  "director": {
+    "name": "Jon Turteltaub",
+    "nationality": "American"
+  },
+  "actors": [
+    "Nicolas Cage",
+    "Diane Kruger",
+    "Justin Bartha"
+  ],
+  "duration": 131,
+  "rating": 6.9,
+  "country": "United States"
+},{
+  "_id": {
+    "$oid": "64127ed5210e96f6a800e6c1"
+  },
+  "title": "Adaptation",
+  "year": 2002,
+  "genre": {
+    "name": "Comedy-drama",
+    "description": "A genre that combines elements of comedy and drama to create a story that is both funny and poignant."
+  },
+  "director": {
+    "name": "Spike Jonze",
+    "nationality": "American"
+  },
+  "actors": [
+    "Nicolas Cage",
+    "Meryl Streep",
+    "Chris Cooper"
+  ],
+  "duration": 114,
+  "rating": 7.7,
+  "country": "United States"
+},{
+  "_id": {
+    "$oid": "64127ed5210e96f6a800e6c2"
+  },
+  "title": "The Rock",
+  "year": 1996,
+  "genre": {
+    "name": "Action",
+    "description": "A genre of fiction that typically involves violence, extended fighting scenes, and high-speed chases."
+  },
+  "director": {
+    "name": "Michael Bay",
+    "nationality": "American"
+  },
+  "actors": [
+    "Sean Connery",
+    "Nicolas Cage",
+    "Ed Harris"
+  ],
+  "duration": 136,
+  "rating": 7.4,
+  "country": "United States"
+}]
