@@ -9,14 +9,14 @@ const { check, validationResult } = require('express-validator');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-// mongoose.connect("mongodb://localhost:27017/nicCage", {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
-mongoose.connect("mongodb+srv://fisherman:fish@niccagedb.ce4u5yh.mongodb.net/nicCageDB?retryWrites=true&w=majority", {
+mongoose.connect("mongodb://localhost:27017/nicCage", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+// mongoose.connect("mongodb+srv://fisherman:fish@niccagedb.ce4u5yh.mongodb.net/nicCageDB?retryWrites=true&w=majority", {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
 
 app.use(express.static("public"));
 
