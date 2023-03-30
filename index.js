@@ -248,7 +248,7 @@ app.get("/movies/:title", passport.authenticate("jwt", { session: false }), (req
 
 // Get a genre by name
 app.get("/genre/:name", passport.authenticate("jwt", { session: false }), (req, res) => {
-  Movies.findOne({ "genre.name": req.params.name })
+  Movies.findOne({ "Genre.name": req.params.name })
     .then((movie) => {
       if (!movie) {
         return res.status(400).send(req.params.name + " not found");
@@ -263,7 +263,7 @@ app.get("/genre/:name", passport.authenticate("jwt", { session: false }), (req, 
 
 // Get a director by name
 app.get("/director/:name", passport.authenticate("jwt", { session: false }), (req, res) => {
-  Movies.findOne({ "director.name": req.params.name })
+  Movies.findOne({ "Director.name": req.params.name })
     .then((movie) => {
       if (!movie) {
         return res.status(400).send(req.params.name + " not found");
