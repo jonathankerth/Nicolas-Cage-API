@@ -268,7 +268,7 @@ app.get("/director/:name", passport.authenticate("jwt", { session: false }), (re
       if (!movie) {
         return res.status(400).send(req.params.name + " not found");
       }
-      res.json(movie.director);
+      res.json(movie.Director);
     })
     .catch((err) => {
       console.error(err);
