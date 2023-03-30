@@ -44,6 +44,7 @@ const cors = require("cors");
 app.use(cors());
 
 const passport = require("passport");
+const { query } = require("express");
 require("./passport");
 
 // endpoints
@@ -68,19 +69,19 @@ app.post("/users", [
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() });
   }
+  console.log("body:", req.body);
+  let hashedPassword = Users.hashPassword(req.body.password);
 
-  let hashedPassword = Users.hashPassword(req.body.Password);
-
-  Users.findOne({ Username: req.body.Username })
+  Users.findOne({Username: req.body.username })
     .then((user) => {
       if (user) {
         return res.status(400).json({ message: req.body.username + " already exists" });
       } else {
         Users.create({
-          esername: req.body.username,
-          password: hashedPassword,
-          email: req.body.email,
-          birthday: req.body.birthday
+          Username: req.body.username,
+          Password: hashedPassword,
+          Email: req.body.email,
+          Birthday: req.body.birthday
         })
         .then((user) => {
           res.status(201).json(user);
