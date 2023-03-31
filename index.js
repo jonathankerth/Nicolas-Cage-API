@@ -46,6 +46,17 @@ require("./passport");
 
 // endpoints
 
+// Endpoint for "/"
+app.get("/", (req, res) => {
+  res.send("Welcome to my movie API!");
+  });
+  
+  // Endpoint for "/favicon.ico"
+  app.get("/favicon.ico", (req, res) => {
+  // Send a 204 No Content status code
+  res.status(204).end();
+  });
+
 //Add a user
 /* We’ll expect JSON in this format
 {
@@ -272,6 +283,8 @@ app.get("/director/:name", passport.authenticate("jwt", { session: false }), (re
       res.status(500).send("Error: " + err);
     });
 });
+
+// Error handling
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
