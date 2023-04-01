@@ -7,7 +7,7 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "jonathan kerth",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",

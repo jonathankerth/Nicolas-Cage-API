@@ -13,7 +13,14 @@ const Users = Models.User;
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true,
 // });
-mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log("MongoDB connected successfully");
+  })
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+  });
+
 
 app.use(express.static("public"));
 
