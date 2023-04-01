@@ -1,10 +1,9 @@
 {
   "name": "nicolas-cage-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "everything you need for a Nicolas Cage API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
   "keywords": [],
