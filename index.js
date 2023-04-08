@@ -14,7 +14,14 @@ const Users = Models.User;
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true,
 // });
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+const connectionUri = process.env.CONNECTION_URI;
+
+if (!connectionUri) {
+  console.error('MongoDB connection string is missing');
+  process.exit(1);
+}
+
+mongoose.connect(connectionUri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('MongoDB connected successfully');
   })
