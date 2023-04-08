@@ -4,7 +4,6 @@ const morgan = require('morgan');
 const app = express();
 const { check, validationResult } = require('express-validator');
 const mongoose = require('mongoose');
-
 const Models = require('./models');
 const bodyParser = require('body-parser');
 
@@ -243,7 +242,7 @@ app.get('/movies', (req, res) => {
     })
     .catch((error) => {
       console.error(error);
-      res.status(500).send('Error: ' + error);
+      res.status(500).send('Error:' + error);
     });
 });
 
