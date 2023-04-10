@@ -224,7 +224,7 @@ app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { se
 });
 
 // Get all movies
-app.get('/movies', (req, res) => {
+app.get('/nicCage/movies', (req, res) => {
   Movies.find()
     .then((movies) => {
       res.status(200).json(movies);
