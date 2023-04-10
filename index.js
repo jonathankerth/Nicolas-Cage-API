@@ -53,13 +53,6 @@ require('./passport');
 app.get('/', (req, res) => {
   res.send('Welcome to my movie API!');
   });
-  
-  // Endpoint for '/favicon.ico'
-  app.get('/favicon.ico', (req, res) => {
-  // Send a 204 No Content status code
-  res.status(204).end();
-  });
-
 //Add a user
 /* We’ll expect JSON in this format
 {
