@@ -258,7 +258,6 @@ app.get('/movies', (req, res) => {
   Movies.find()
     .then((movies) => {
       res.status(200).json(movies)
-      res.status(200).json(movies)
     })
     .catch((error) => {
       console.error(error)
@@ -268,7 +267,7 @@ app.get('/movies', (req, res) => {
 
 // Get a movie by title
 app.get('/movies/:title', (req, res) => {
-  Movies.findOne({ title: req.params.Title })
+  Movies.findOne({ title: req.params.title })
     .then((movie) => {
       if (!movie) {
         return res.status(400).send(req.params.title + ' not found')
