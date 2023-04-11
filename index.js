@@ -38,7 +38,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 require('./auth')(app)
 
 const cors = require('cors')
-app.use(cors())
+
+const corsOptions = {
+  origin: '*', // Replace this with the actual origin of your web application
+  optionsSuccessStatus: 200,
+}
+
+app.use(cors(corsOptions))
 
 const passport = require('passport')
 const { query } = require('express')
