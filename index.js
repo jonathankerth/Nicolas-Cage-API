@@ -5,6 +5,7 @@ const app = express()
 const { check, validationResult } = require('express-validator')
 const mongoose = require('mongoose')
 const Models = require('./models')
+const bodyParser = require('body-parser')
 
 const Movies = Models.Movie
 const Users = Models.User
@@ -31,10 +32,10 @@ let requestTime = (req, res, next) => {
 app.use(myLogger)
 app.use(requestTime)
 
-app.use(express.json())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
-let auth = require('./auth')(app)
-auth(app)
+require('./auth')(app)
 
 const cors = require('cors')
 app.use(cors())
@@ -49,8 +50,7 @@ require('./passport')
 app.get('/', (req, res) => {
   res.send('Welcome to my movie API!')
 })
-
-// Add a user
+//Add a user
 /* We’ll expect JSON in this format
 {
   ID: Integer,
@@ -267,7 +267,7 @@ app.get('/movies', (req, res) => {
 
 // Get a movie by title
 app.get('/movies/:title', (req, res) => {
-  Movies.findOne({ title: req.params.title })
+  Movies.findOne({ title: req.params.Title })
     .then((movie) => {
       if (!movie) {
         return res.status(400).send(req.params.title + ' not found')
@@ -317,6 +317,7 @@ app.get(
       })
   }
 )
+
 // Error handling
 
 app.use((err, req, res, next) => {
