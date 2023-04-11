@@ -1,6 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')
-
+const cors = require('cors')
 const app = express()
 const { check, validationResult } = require('express-validator')
 const mongoose = require('mongoose')
@@ -14,6 +14,13 @@ mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
+
+const corsOptions = {
+  origin: 'http://localhost:1234', // Replace with your client's origin
+  optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+app.use(cors(corsOptions))
 
 app.use(express.static('public'))
 
@@ -36,15 +43,6 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 require('./auth')(app)
-
-const cors = require('cors')
-
-const corsOptions = {
-  origin: 'http://localhost:1234', // Replace this with the actual origin of your web application
-  optionsSuccessStatus: 200,
-}
-
-app.use(cors(corsOptions))
 
 const passport = require('passport')
 const { query } = require('express')
