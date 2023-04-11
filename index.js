@@ -40,7 +40,7 @@ require('./auth')(app)
 const cors = require('cors')
 
 const corsOptions = {
-  origin: '*', // Replace this with the actual origin of your web application
+  origin: 'http://localhost:1234', // Replace this with the actual origin of your web application
   optionsSuccessStatus: 200,
 }
 
