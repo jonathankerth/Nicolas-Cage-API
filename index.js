@@ -6,6 +6,7 @@ const { check, validationResult } = require('express-validator')
 const mongoose = require('mongoose')
 const Models = require('./models')
 const bodyParser = require('body-parser')
+const passport = require('passport')
 
 const Movies = Models.Movie
 const Users = Models.User
@@ -37,6 +38,7 @@ app.use(
     },
   })
 )
+
 app.use(express.static('public'))
 
 app.use(morgan('common'))
@@ -57,11 +59,11 @@ app.use(requestTime)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-require('./auth')(app)
-
-const passport = require('passport')
-const { query } = require('express')
 require('./passport')
+app.use(passport.initialize())
+app.use(passport.session())
+
+require('./auth')(app)
 
 // endpoints
 
