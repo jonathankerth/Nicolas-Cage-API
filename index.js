@@ -19,7 +19,8 @@ let allowedOrigins = [
   'http://localhost:8080',
   'http://localhost:1234',
   'http://testsite.com',
-  'https://myflixdb.herokuapp.com',
+  'https://myflixdb.herokuapp.com'
+  'https://myflixdb.herokuapp.com/movies',
 ]
 
 app.use(
