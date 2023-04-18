@@ -21,6 +21,7 @@ let allowedOrigins = [
   'http://testsite.com',
   'https://myflixdb.herokuapp.com',
   'https://myflixdb.herokuapp.com/movies',
+  '*',
 ]
 
 app.use(
@@ -38,6 +39,7 @@ app.use(
     },
   })
 )
+
 app.use(express.static('public'))
 
 app.use(morgan('common'))
