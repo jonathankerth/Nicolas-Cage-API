@@ -10,7 +10,6 @@ const bodyParser = require('body-parser')
 const Movies = Models.Movie
 const Users = Models.User
 
-
 mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -24,7 +23,7 @@ let allowedOrigins = [
   'https://myflixdb.herokuapp.com/movies',
   'https://myflixdb.herokuapp.com/users',
   'https://myflixdb.herokuapp.com/users/:Username',
-  'https://myflixdb.herokuapp.com/users/:username'
+  'https://myflixdb.herokuapp.com/users/:username',
   'https://niccage.herokuapp.com/',
   'https://niccage.herokuapp.com/movies',
   'https://niccage.herokuapp.com/users',
