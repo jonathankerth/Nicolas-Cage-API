@@ -17,8 +17,9 @@ mongoose.connect(process.env.CONNECTION_URI, {
 
 let allowedOrigins = [
   'http://localhost:8080',
-  'http://localhost:1234',
-  'http://testsite.com',
+  'http://localhost:1234/movies',
+  'http://localhost:1234/movies/users/',
+  'http://localhost:1234/users/${user.Username}/movies/${movieId}`',
   'https://myflixdb.herokuapp.com',
   'https://myflixdb.herokuapp.com/movies',
   'https://myflixdb.herokuapp.com/users',
