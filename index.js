@@ -231,7 +231,6 @@ app.delete(
   }
 )
 
-// Add a movie to a user's list of favorites
 app.post(
   '/users/:Username/movies/:MovieId',
   passport.authenticate('jwt', { session: false }),
@@ -240,9 +239,7 @@ app.post(
 
     User.findOneAndUpdate(
       { Username },
-      {
-        $push: { FavoriteMovies: MovieId },
-      },
+      { $push: { FavoriteMovies: MovieId } },
       { new: true }
     )
       .populate('FavoriteMovies')
@@ -250,6 +247,7 @@ app.post(
         if (!user) {
           return res.status(400).send(`${Username} not found`)
         }
+
         res.json(user)
       })
       .catch((err) => {
