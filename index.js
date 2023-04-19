@@ -264,13 +264,13 @@ app.post(
 
 // Delete a movie to a user's list of favorites
 app.delete(
-  '/users/:Username/movies/:MovieID',
+  '/users/:Username/movies/:MovieId',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
-        $pull: { FavoriteMovies: req.params.MovieID },
+        $pull: { FavoriteMovies: req.params.MovieId },
       },
       { new: true }
     )
