@@ -231,25 +231,31 @@ app.delete(
   }
 )
 
+// Add a movie to a user's list of favorites
 app.post(
-  '/users/:username/movies/:MovieID',
+  '/users/:Username/movies/:MovieId',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    Users.findOneAndUpdate(
-      { username: req.params.id },
+    const { Username, MovieId } = req.params
+
+    User.findOneAndUpdate(
+      { Username },
       {
-        $push: { FavoriteMovies: req.params.movieID },
+        $push: { FavoriteMovies: MovieId },
       },
-      { new: true }, // This line makes sure that the updated document is returned
-      (err, updatedUser) => {
-        if (err) {
-          console.error(err)
-          res.status(500).send('Error: ' + err)
-        } else {
-          res.json(updatedUser)
-        }
-      }
+      { new: true }
     )
+      .populate('FavoriteMovies')
+      .then((user) => {
+        if (!user) {
+          return res.status(400).send(`${Username} not found`)
+        }
+        res.json(user)
+      })
+      .catch((err) => {
+        console.error(err)
+        res.status(500).send('Error: ' + err)
+      })
   }
 )
 
@@ -292,7 +298,7 @@ app.get('/movies', (req, res) => {
 
 // Get a movie by title
 app.get('/movies/:title', (req, res) => {
-  Movies.findOne({ title: req.params.Title })
+  Movies.findOne({ title: req.params.title })
     .then((movie) => {
       if (!movie) {
         return res.status(400).send(req.params.title + ' not found')
