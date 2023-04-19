@@ -232,32 +232,28 @@ app.delete(
 )
 
 // Add a movie to a user's list of favorites
-app.post(
-  '/users/:Username/movies/:MovieId',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    const { Username, MovieId } = req.params
+app.post('/users/:Username/movies/:MovieId', cors(), (req, res) => {
+  const { Username, MovieId } = req.params
 
-    User.findOneAndUpdate(
-      { Username },
-      {
-        $push: { FavoriteMovies: MovieId },
-      },
-      { new: true }
-    )
-      .populate('FavoriteMovies')
-      .then((user) => {
-        if (!user) {
-          return res.status(400).send(`${Username} not found`)
-        }
-        res.json(user)
-      })
-      .catch((err) => {
-        console.error(err)
-        res.status(500).send('Error: ' + err)
-      })
-  }
-)
+  User.findOneAndUpdate(
+    { Username },
+    {
+      $push: { FavoriteMovies: MovieId },
+    },
+    { new: true }
+  )
+    .populate('FavoriteMovies')
+    .then((user) => {
+      if (!user) {
+        return res.status(400).send(`${Username} not found`)
+      }
+      res.json(user)
+    })
+    .catch((err) => {
+      console.error(err)
+      res.status(500).send('Error: ' + err)
+    })
+})
 
 // Delete a movie to a user's list of favorites
 app.delete(
