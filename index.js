@@ -242,7 +242,7 @@ app.post(
   (req, res) => {
     const { Username, MovieId } = req.params
 
-    User.findOneAndUpdate(
+    Users.findOneAndUpdate(
       { Username },
       { $push: { FavoriteMovies: MovieId } },
       { new: true }
