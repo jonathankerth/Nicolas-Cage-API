@@ -21,6 +21,13 @@ let allowedOrigins = [
   'http://testsite.com',
   'https://myflixdb.herokuapp.com',
   'https://myflixdb.herokuapp.com/movies',
+  'https://myflixdb.herokuapp.com/users',
+  'https://myflixdb.herokuapp.com/users/:Username',
+  'https://myflixdb.herokuapp.com/users/:username',
+  'http://localhost:1234/users/:username',
+  'http://localhost:1234/users/:Username',
+  'http://localhost:1234/movies',
+  'http://localhost:1234/movies/:Title',
   '*',
 ]
 
@@ -63,7 +70,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 require('./auth')(app)
 
 const passport = require('passport')
-const { query } = require('express')
 require('./passport')
 
 // endpoints
@@ -227,13 +233,13 @@ app.delete(
 
 // Add a movie to a user's list of favorites
 app.post(
-  '/users/:Username/movies/:MovieID',
+  '/users/:Username/movies/:MovieId',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
-        $push: { FavoriteMovies: req.params.MovieID },
+        $push: { FavoriteMovies: req.params.MovieId },
       },
       { new: true }
     )
