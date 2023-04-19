@@ -236,16 +236,19 @@ app.post(
   '/users/:Username/movies/:MovieId',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    Users.findOneAndUpdate(
-      { Username: req.params.Username },
+    const { Username, MovieId } = req.params
+
+    User.findOneAndUpdate(
+      { Username },
       {
-        $push: { FavoriteMovies: req.params.MovieId },
+        $push: { FavoriteMovies: MovieId },
       },
       { new: true }
     )
+      .populate('FavoriteMovies')
       .then((user) => {
         if (!user) {
-          return res.status(400).send(req.params.Username + ' not found')
+          return res.status(400).send(`${Username} not found`)
         }
         res.json(user)
       })
