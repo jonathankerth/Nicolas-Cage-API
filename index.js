@@ -243,7 +243,7 @@ app
   .get(passport.authenticate('jwt', { session: false }), (req, res) => {
     // Handle GET request
   })
-  .post(passport.authenticate('jwt', { session: false }), (req, res) => {
+  .post((req, res) => {
     const { Username, MovieId } = req.params
 
     Users.findOneAndUpdate(
