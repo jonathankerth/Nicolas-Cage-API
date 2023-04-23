@@ -17,6 +17,8 @@ mongoose.connect(process.env.CONNECTION_URI, {
 
 let allowedOrigins = [
   'http://localhost:8080',
+  'https://main--niccagecllient.netlify.app/',
+  'https://main--niccagecllient.netlify.app/movies',
   'http://localhost:1234/movies',
   'http://localhost:1234/movies/users/',
   'http://localhost:1234/users/${user.Username}/movies/${movieId}`',
