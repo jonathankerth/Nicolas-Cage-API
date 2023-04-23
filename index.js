@@ -19,6 +19,8 @@ let allowedOrigins = [
   'http://localhost:8080',
   'https://main--niccagecllient.netlify.app/',
   'https://main--niccagecllient.netlify.app/movies',
+  'https://main--niccagecllient.netlify.app/login',
+  'https://main--niccagecllient.netlify.app/profile',
   'http://localhost:1234/movies',
   'http://localhost:1234/movies/users/',
   'http://localhost:1234/users/${user.Username}/movies/${movieId}`',
