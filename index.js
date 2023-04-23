@@ -17,30 +17,21 @@ mongoose.connect(process.env.CONNECTION_URI, {
 
 let allowedOrigins = [
   'http://localhost:8080',
-  'https://main--niccagecllient.netlify.app/',
-  'https://main--niccagecllient.netlify.app/movies',
-  'https://main--niccagecllient.netlify.app/login',
-  'https://main--niccagecllient.netlify.app/profile',
-  'http://localhost:1234/movies',
-  'http://localhost:1234/movies/users/',
-  'http://localhost:1234/users/${user.Username}/movies/${movieId}`',
+  'https://main--niccagecllient.netlify.app',
   'http://localhost:1234',
   'https://myflixdb.herokuapp.com',
-  'https://myflixdb.herokuapp.com/movies',
-  'https://myflixdb.herokuapp.com/users',
-  'https://myflixdb.herokuapp.com/users/:Username',
-  'https://myflixdb.herokuapp.com/users/:username',
-  'https://niccage.herokuapp.com/',
-  'https://niccage.herokuapp.com/movies',
-  'https://niccage.herokuapp.com/users',
-  'https://niccage.herokuapp.com/users/:Username',
-  'https://niccage.herokuapp.com/users/:username',
-  'http://localhost:1234/users/:username',
-  'http://localhost:1234/users/:Username',
-  'http://localhost:1234/movies',
-  'http://localhost:1234/movies/:Title',
-  '*',
+  'https://niccage.herokuapp.com',
 ]
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+  )
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+  next()
+})
 
 app.use(
   cors({
