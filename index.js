@@ -266,30 +266,30 @@ app
     // Handle DELETE request
   })
 
-// Delete a movie to a user's list of favorites
-// app.delete(
-//   '/users/:Username/movies/:MovieId',
-//   passport.authenticate('jwt', { session: false }),
-//   (req, res) => {
-//     Users.findOneAndUpdate(
-//       { Username: req.params.Username },
-//       {
-//         $pull: { FavoriteMovies: req.params.MovieId },
-//       },
-//       { new: true }
-//     )
-//       .then((user) => {
-//         if (!user) {
-//           return res.status(400).send(req.params.Username + ' not found')
-//         }
-//         res.json(user)
-//       })
-//       .catch((err) => {
-//         console.error(err)
-//         res.status(500).send('Error: ' + err)
-//       })
-//   }
-// )
+// Delete a movie from a user's list of favorites
+app.delete(
+  '/users/:Username/movies/:MovieId',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const { Username, MovieId } = req.params
+    Users.findOneAndUpdate(
+      { Username },
+      { $pull: { FavoriteMovies: MovieId } },
+      { new: true }
+    )
+      .populate('FavoriteMovies')
+      .then((user) => {
+        if (!user) {
+          return res.status(400).send(`${Username} not found`)
+        }
+        res.json(user)
+      })
+      .catch((err) => {
+        console.error(err)
+        res.status(500).send('Error: ' + err)
+      })
+  }
+)
 
 // Get all movies
 app.get('/movies', (req, res) => {
