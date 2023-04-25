@@ -234,54 +234,42 @@ app.delete(
   }
 )
 
-app
-  .route('/users/:Username/movies/:MovieId')
-  .get(passport.authenticate('jwt', { session: false }), (req, res) => {
-    // Handle GET request
-  })
-  .post(passport.authenticate('jwt', { session: false }), (req, res) => {
+app.post(
+  '/users/:Username/movies/:MovieId',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
     const { Username, MovieId } = req.params
-
-    Users.findOneAndUpdate(
-      { Username },
-      { $push: { FavoriteMovies: MovieId } },
-      { new: true }
-    )
-      .populate('FavoriteMovies')
+    Users.findOne({ Username: Username })
       .then((user) => {
-        if (!user) {
-          return res.status(400).send(`${Username} not found`)
+        if (user.FavoriteMovies.includes(MovieId)) {
+          return res
+            .status(400)
+            .send(`${MovieId} is already in ${Username}'s favorites`)
+        } else {
+          Users.findOneAndUpdate(
+            { Username: Username },
+            { $push: { FavoriteMovies: MovieId } },
+            { new: true }
+          )
+            .populate('FavoriteMovies')
+            .then((user) => {
+              if (!user) {
+                return res.status(400).send(`${Username} not found`)
+              }
+              res.status(201).json(user)
+            })
+            .catch((err) => {
+              console.error(err)
+              res.status(500).send(`Error: ${err}`)
+            })
         }
-
-        res.json(user)
       })
       .catch((err) => {
         console.error(err)
-        res.status(500).send('Error: ' + err)
+        res.status(500).send(`Error: ${err}`)
       })
-  })
-  .put(passport.authenticate('jwt', { session: false }), (req, res) => {
-    // Handle PUT request
-  })
-  .delete(passport.authenticate('jwt', { session: false }), (req, res) => {
-    const { Username, MovieId } = req.params
-    Users.findOneAndUpdate(
-      { Username },
-      { $pull: { FavoriteMovies: MovieId } },
-      { new: true }
-    )
-      .populate('FavoriteMovies')
-      .then((user) => {
-        if (!user) {
-          return res.status(400).send(`${Username} not found`)
-        }
-        res.json(user)
-      })
-      .catch((err) => {
-        console.error(err)
-        res.status(500).send('Error: ' + err)
-      })
-  })
+  }
+)
 
 // Get all movies
 app.get('/movies', (req, res) => {
