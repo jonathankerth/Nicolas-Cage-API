@@ -21,6 +21,7 @@ let allowedOrigins = [
   'http://localhost:1234',
   'https://myflixdb.herokuapp.com',
   'https://niccage.herokuapp.com',
+  '*',
 ]
 
 app.use((req, res, next) => {
@@ -238,7 +239,7 @@ app
   .get(passport.authenticate('jwt', { session: false }), (req, res) => {
     // Handle GET request
   })
-  .post((req, res) => {
+  .post(passport.authenticate('jwt', { session: false }), (req, res) => {
     const { Username, MovieId } = req.params
 
     Users.findOneAndUpdate(
@@ -263,14 +264,6 @@ app
     // Handle PUT request
   })
   .delete(passport.authenticate('jwt', { session: false }), (req, res) => {
-    // Handle DELETE request
-  })
-
-// Delete a movie from a user's list of favorites
-app.delete(
-  '/users/:Username/movies/:MovieId',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
     const { Username, MovieId } = req.params
     Users.findOneAndUpdate(
       { Username },
@@ -288,8 +281,7 @@ app.delete(
         console.error(err)
         res.status(500).send('Error: ' + err)
       })
-  }
-)
+  })
 
 // Get all movies
 app.get('/movies', (req, res) => {
