@@ -264,7 +264,24 @@ app
     // Handle PUT request
   })
   .delete(passport.authenticate('jwt', { session: false }), (req, res) => {
-    // Handle DELETE request
+    const { Username, MovieId } = req.params
+
+    Users.findOneAndUpdate(
+      { Username },
+      { $pull: { FavoriteMovies: MovieId } },
+      { new: true }
+    )
+      .populate('FavoriteMovies')
+      .then((user) => {
+        if (!user) {
+          return res.status(400).send(`${Username} not found`)
+        }
+        res.json(user)
+      })
+      .catch((err) => {
+        console.error(err)
+        res.status(500).send('Error: ' + err)
+      })
   })
 
 // Get all movies
