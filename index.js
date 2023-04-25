@@ -234,42 +234,38 @@ app.delete(
   }
 )
 
-app.post(
-  '/users/:Username/movies/:MovieId',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
+app
+  .route('/users/:Username/movies/:MovieId')
+  .get(passport.authenticate('jwt', { session: false }), (req, res) => {
+    // Handle GET request
+  })
+  .post((req, res) => {
     const { Username, MovieId } = req.params
-    Users.findOne({ Username: Username })
+
+    Users.findOneAndUpdate(
+      { Username },
+      { $push: { FavoriteMovies: MovieId } },
+      { new: true }
+    )
+      .populate('FavoriteMovies')
       .then((user) => {
-        if (user.FavoriteMovies.includes(MovieId)) {
-          return res
-            .status(400)
-            .send(`${MovieId} is already in ${Username}'s favorites`)
-        } else {
-          Users.findOneAndUpdate(
-            { Username: Username },
-            { $push: { FavoriteMovies: MovieId } },
-            { new: true }
-          )
-            .populate('FavoriteMovies')
-            .then((user) => {
-              if (!user) {
-                return res.status(400).send(`${Username} not found`)
-              }
-              res.status(201).json(user)
-            })
-            .catch((err) => {
-              console.error(err)
-              res.status(500).send(`Error: ${err}`)
-            })
+        if (!user) {
+          return res.status(400).send(`${Username} not found`)
         }
+
+        res.json(user)
       })
       .catch((err) => {
         console.error(err)
-        res.status(500).send(`Error: ${err}`)
+        res.status(500).send('Error: ' + err)
       })
-  }
-)
+  })
+  .put(passport.authenticate('jwt', { session: false }), (req, res) => {
+    // Handle PUT request
+  })
+  .delete(passport.authenticate('jwt', { session: false }), (req, res) => {
+    // Handle DELETE request
+  })
 
 // Get all movies
 app.get('/movies', (req, res) => {
