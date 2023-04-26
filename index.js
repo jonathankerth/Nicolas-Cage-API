@@ -40,6 +40,8 @@ app.use(
       }
       return callback(null, true)
     },
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
   })
 )
 
