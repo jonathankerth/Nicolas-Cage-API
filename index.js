@@ -21,7 +21,7 @@ let allowedOrigins = [
   'http://localhost:1234',
   'https://myflixdb.herokuapp.com',
   'https://niccage.herokuapp.com',
-  'https://niccagecllient.netlify.app/',
+  'https://niccagecllient.netlify.app',
   '*',
 ]
 
