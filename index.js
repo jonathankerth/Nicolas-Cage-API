@@ -17,6 +17,7 @@ mongoose.connect(process.env.CONNECTION_URI, {
 
 let allowedOrigins = [
   'http://localhost:8080',
+  'http://localhost:4200',
   'https://main--niccagecllient.netlify.app',
   'http://localhost:1234',
   'https://myflixdb.herokuapp.com',
