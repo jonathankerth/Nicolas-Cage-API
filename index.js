@@ -79,13 +79,14 @@ app.get('/', (req, res) => {
 app.post(
   '/users',
   [
-    check('username', 'Username is required').isLength({ min: 5 }),
+    check('Username', 'Username is required').isLength({ min: 5 }),
     check(
-      'username',
-      'Username contains non alphanumeric characters - not allowed.'
+      'Username',
+      'Username contains non-alphanumeric characters - not allowed.'
     ).isAlphanumeric(),
-    check('password', 'Password is required').not().isEmpty(),
-    check('email', 'Email does not appear to be valid').isEmail(),
+    check('Password', 'Password is required').notEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail(),
+    check('Birthday', 'Birthday is required').notEmpty(),
   ],
   (req, res) => {
     let errors = validationResult(req)
@@ -93,34 +94,32 @@ app.post(
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() })
     }
-    console.log('body:', req.body)
-    let hashedPassword = Users.hashPassword(req.body.password)
 
-    Users.findOne({ Username: req.body.username })
+    let hashedPassword = Users.hashPassword(req.body.Password)
+
+    Users.findOne({ Username: req.body.Username })
       .then((user) => {
         if (user) {
-          return res
-            .status(400)
-            .json({ message: req.body.username + ' already exists' })
+          return res.status(400).json({ message: 'Username already exists' })
         } else {
           Users.create({
-            Username: req.body.username,
+            Username: req.body.Username,
             Password: hashedPassword,
-            Email: req.body.email,
-            Birthday: req.body.birthday,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday,
           })
             .then((user) => {
-              res.status(201).json(user)
+              res.status(201).json({ message: 'User created successfully' })
             })
             .catch((error) => {
               console.error(error)
-              res.status(500).json({ message: 'Error: ' + error })
+              res.status(500).json({ message: 'Error creating user' })
             })
         }
       })
       .catch((error) => {
         console.error(error)
-        res.status(500).json({ message: 'Error: ' + error })
+        res.status(500).json({ message: 'Error finding user' })
       })
   }
 )
