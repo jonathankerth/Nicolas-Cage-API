@@ -25,6 +25,7 @@ let allowedOrigins = [
   'https://niccagecllient.netlify.app',
   'https://main--niccagecllient.netlify.app/',
   'https://niccagecllient.netlify.app/',
+  'https://jonathankerth.github.io/',
   '*',
 ]
 
