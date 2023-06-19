@@ -26,6 +26,7 @@ let allowedOrigins = [
   'https://main--niccagecllient.netlify.app/',
   'https://niccagecllient.netlify.app/',
   'https://jonathankerth.github.io/',
+  'https://jonathankerth.github.io/myFlix-Angular-client/welcome',
   '*',
 ]
 
